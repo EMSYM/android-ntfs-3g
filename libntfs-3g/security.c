@@ -2133,6 +2133,7 @@ int ntfs_get_posix_acl(struct SECURITY_CONTEXT *scx, ntfs_inode *ni,
  *	returns -1 if there is a problem
  */
 
+#if 0
 static int ntfs_get_perm(struct SECURITY_CONTEXT *scx,
 		ntfs_inode *ni,	mode_t request)
 {
@@ -2236,6 +2237,7 @@ static int ntfs_get_perm(struct SECURITY_CONTEXT *scx,
 	}
 	return (perm);
 }
+#endif
 
 #endif /* POSIXACLS */
 
@@ -3246,6 +3248,7 @@ int ntfs_allowed_access(struct SECURITY_CONTEXT *scx,
 		ntfs_inode *ni,
 		int accesstype) /* access type required (S_Ixxx values) */
 {
+#if 0
 	int perm;
 	int res;
 	int allow;
@@ -3314,6 +3317,8 @@ int ntfs_allowed_access(struct SECURITY_CONTEXT *scx,
 			allow = 0;
 	}
 	return (allow);
+#endif
+	return 1;
 }
 
 #if 0 /* not needed any more */

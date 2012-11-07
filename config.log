@@ -2514,7 +2514,7 @@ configure:23790: $? = 0
 configure:23808: result: yes
 configure:23815: checking for _doprnt
 configure:23871: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccQtN82q.o: In function `main':
+/tmp/cc6c9p3d.o: In function `main':
 /home/b03824/android-jb/external/ntfs-3g_ntfsprogs-2012.1.15/conftest.c:110: undefined reference to `_doprnt'
 collect2: ld returned 1 exit status
 configure:23877: $? = 1
@@ -2749,7 +2749,7 @@ configure:24007: $? = 0
 configure:24025: result: yes
 configure:23945: checking for clock_gettime
 configure:24001: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccWCzzKB.o: In function `main':
+/tmp/ccVCm62p.o: In function `main':
 /home/b03824/android-jb/external/ntfs-3g_ntfsprogs-2012.1.15/conftest.c:137: undefined reference to `clock_gettime'
 collect2: ld returned 1 exit status
 configure:24007: $? = 1

@@ -45,9 +45,6 @@
 /* Define to 1 if you have the `dup2' function. */
 #define HAVE_DUP2 1
 
-/* Define to 1 if you have the <endian.h> header file. */
-#define HAVE_ENDIAN_H 1
-
 /* Define to 1 if you have the <errno.h> header file. */
 #define HAVE_ERRNO_H 1
 
@@ -67,7 +64,7 @@
 #define HAVE_FORK 1
 
 /* Define to 1 if you have the `getmntent' function. */
-#define HAVE_GETMNTENT 
+#define HAVE_GETMNTENT 1
 
 /* Define to 1 if you have the <getopt.h> header file. */
 #define HAVE_GETOPT_H 1
@@ -79,7 +76,7 @@
 #define HAVE_GETTIMEOFDAY 1
 
 /* Define to 1 if you have the `hasmntopt' function. */
-#define HAVE_HASMNTOPT 1
+/* #undef HAVE_HASMNTOPT */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -138,9 +135,6 @@
 /* Define to 1 if you have the `setlocale' function. */
 #define HAVE_SETLOCALE 1
 
-/* Define to 1 if you have the `setxattr' function. */
-#define HAVE_SETXATTR 1
-
 /* Define to 1 if `stat' has the bug that it succeeds when given the
    zero-length file name argument. */
 /* #undef HAVE_STAT_EMPTY_STRING_BUG */
@@ -197,7 +191,7 @@
 #define HAVE_STRTOUL 1
 
 /* Define to 1 if `st_atim' is member of `struct stat'. */
-#define HAVE_STRUCT_STAT_ST_ATIM 1
+/* #undef HAVE_STRUCT_STAT_ST_ATIM */
 
 /* Define to 1 if `st_atimensec' is member of `struct stat'. */
 /* #undef HAVE_STRUCT_STAT_ST_ATIMENSEC */
@@ -267,7 +261,7 @@
 #define HAVE_UTIME 1
 
 /* Define to 1 if you have the `utimensat' function. */
-#define HAVE_UTIMENSAT 1
+/* #undef HAVE_UTIMENSAT */
 
 /* Define to 1 if you have the <utime.h> header file. */
 #define HAVE_UTIME_H 1
