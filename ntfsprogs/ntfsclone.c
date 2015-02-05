@@ -571,16 +571,16 @@ static int io_all(void *fd, void *buf, int count, int do_write)
 }
 
 
-static void rescue_sector(void *fd, off_t pos, void *buff)
+static void rescue_sector(void *fd, off64_t pos, void *buff)
 {
 	const char *badsector_magic = "BadSectoR\0";
 	struct ntfs_device *dev = fd;
 
 	if (opt.restore_image) {
-		if (lseek(*(int *)fd, pos, SEEK_SET) == (off_t)-1)
+		if (lseek(*(int *)fd, pos, SEEK_SET) == (off64_t)-1)
 			perr_exit("lseek");
 	} else {
-		if (vol->dev->d_ops->seek(dev, pos, SEEK_SET) == (off_t)-1)
+		if (vol->dev->d_ops->seek(dev, pos, SEEK_SET) == (off64_t)-1)
 			perr_exit("seek input");
 	}
 
@@ -599,14 +599,14 @@ static void copy_cluster(int rescue, u64 rescue_lcn, u64 lcn)
 	/* vol is NULL if opt.restore_image is set */
 	s32 csize = le32_to_cpu(image_hdr.cluster_size);
 	void *fd = (void *)&fd_in;
-	off_t rescue_pos;
+	off64_t rescue_pos;
 
 	if (!opt.restore_image) {
 		csize = vol->cluster_size;
 		fd = vol->dev;
 	}
 
-	rescue_pos = (off_t)(rescue_lcn * csize);
+	rescue_pos = (off64_t)(rescue_lcn * csize);
 
 		/* possible partial cluster holding the backup boot sector */
 	if ((lcn + 1)*csize > full_device_size) {
@@ -655,17 +655,17 @@ static void copy_cluster(int rescue, u64 rescue_lcn, u64 lcn)
 
 static void lseek_to_cluster(s64 lcn)
 {
-	off_t pos;
+	off64_t pos;
 
-	pos = (off_t)(lcn * vol->cluster_size);
+	pos = (off64_t)(lcn * vol->cluster_size);
 
-	if (vol->dev->d_ops->seek(vol->dev, pos, SEEK_SET) == (off_t)-1)
+	if (vol->dev->d_ops->seek(vol->dev, pos, SEEK_SET) == (off64_t)-1)
 		perr_exit("lseek input");
 
 	if (opt.std_out || opt.save_image || opt.metadata_image)
 		return;
 
-	if (lseek(fd_out, pos, SEEK_SET) == (off_t)-1)
+	if (lseek(fd_out, pos, SEEK_SET) == (off64_t)-1)
 		perr_exit("lseek output");
 }
 
@@ -860,7 +860,7 @@ static void restore_image(void)
 					err_exit("restore_image: corrupt image\n");
 				else
 					if (lseek(fd_out, count * csize,
-							SEEK_CUR) == (off_t)-1)
+							SEEK_CUR) == (off64_t)-1)
 						perr_exit("restore_image: lseek");
 			}
 			pos += count;

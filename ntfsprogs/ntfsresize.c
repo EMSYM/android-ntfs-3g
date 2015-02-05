@@ -1709,11 +1709,11 @@ static int write_mft_record(ntfs_volume *v, const MFT_REF mref, MFT_RECORD *buf)
 
 static void lseek_to_cluster(ntfs_volume *vol, s64 lcn)
 {
-	off_t pos;
+	off64_t pos;
 
-	pos = (off_t)(lcn * vol->cluster_size);
+	pos = (off64_t)(lcn * vol->cluster_size);
 
-	if (vol->dev->d_ops->seek(vol->dev, pos, SEEK_SET) == (off_t)-1)
+	if (vol->dev->d_ops->seek(vol->dev, pos, SEEK_SET) == (off64_t)-1)
 		perr_exit("seek failed to position %lld", (long long)lcn);
 }
 
@@ -2483,7 +2483,7 @@ static void update_bootsector(ntfs_resize_t *r)
 
 	printf("Updating Boot record ...\n");
 
-	if (vol->dev->d_ops->seek(vol->dev, 0, SEEK_SET) == (off_t)-1)
+	if (vol->dev->d_ops->seek(vol->dev, 0, SEEK_SET) == (off64_t)-1)
 		perr_exit("lseek");
 
 	if (vol->dev->d_ops->read(vol->dev, &bs, bs_size) == -1)
@@ -2500,7 +2500,7 @@ static void update_bootsector(ntfs_resize_t *r)
 		r->progress.flags &= ~NTFS_PROGBAR_SUPPRESS;
 	}
 
-	if (vol->dev->d_ops->seek(vol->dev, 0, SEEK_SET) == (off_t)-1)
+	if (vol->dev->d_ops->seek(vol->dev, 0, SEEK_SET) == (off64_t)-1)
 		perr_exit("lseek");
 
 	if (!opt.ro_flag)

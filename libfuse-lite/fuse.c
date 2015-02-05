@@ -80,8 +80,8 @@ struct fuse {
 
 struct lock {
     int type;
-    off_t start;
-    off_t end;
+    off64_t start;
+    off64_t end;
     pid_t pid;
     uint64_t owner;
     struct lock *next;
@@ -628,7 +628,7 @@ int fuse_fs_open(struct fuse_fs *fs, const char *path,
 }
 
 int fuse_fs_read(struct fuse_fs *fs, const char *path, char *buf, size_t size,
-                 off_t off, struct fuse_file_info *fi)
+                 off64_t off, struct fuse_file_info *fi)
 {
     fuse_get_context()->private_data = fs->user_data;
     if (fs->op.read)
@@ -638,7 +638,7 @@ int fuse_fs_read(struct fuse_fs *fs, const char *path, char *buf, size_t size,
 }
 
 int fuse_fs_write(struct fuse_fs *fs, const char *path, const char *buf,
-                  size_t size, off_t off, struct fuse_file_info *fi)
+                  size_t size, off64_t off, struct fuse_file_info *fi)
 {
     fuse_get_context()->private_data = fs->user_data;
     if (fs->op.write)
@@ -700,7 +700,7 @@ int fuse_fs_releasedir(struct fuse_fs *fs, const char *path,
 }
 
 int fuse_fs_readdir(struct fuse_fs *fs, const char *path, void *buf,
-                    fuse_fill_dir_t filler, off_t off,
+                    fuse_fill_dir_t filler, off64_t off,
                     struct fuse_file_info *fi)
 {
     fuse_get_context()->private_data = fs->user_data;
@@ -739,7 +739,7 @@ int fuse_fs_chown(struct fuse_fs *fs, const char *path, uid_t uid, gid_t gid)
         return -ENOSYS;
 }
 
-int fuse_fs_truncate(struct fuse_fs *fs, const char *path, off_t size)
+int fuse_fs_truncate(struct fuse_fs *fs, const char *path, off64_t size)
 {
     fuse_get_context()->private_data = fs->user_data;
     if (fs->op.truncate)
@@ -748,7 +748,7 @@ int fuse_fs_truncate(struct fuse_fs *fs, const char *path, off_t size)
         return -ENOSYS;
 }
 
-int fuse_fs_ftruncate(struct fuse_fs *fs, const char *path, off_t size,
+int fuse_fs_ftruncate(struct fuse_fs *fs, const char *path, off64_t size,
                       struct fuse_file_info *fi)
 {
     fuse_get_context()->private_data = fs->user_data;
@@ -1615,7 +1615,7 @@ static void fuse_lib_open(fuse_req_t req, fuse_ino_t ino,
 }
 
 static void fuse_lib_read(fuse_req_t req, fuse_ino_t ino, size_t size,
-                          off_t off, struct fuse_file_info *fi)
+                          off64_t off, struct fuse_file_info *fi)
 {
     struct fuse *f = req_fuse_prepare(req);
     char *path;
@@ -1659,7 +1659,7 @@ static void fuse_lib_read(fuse_req_t req, fuse_ino_t ino, size_t size,
 }
 
 static void fuse_lib_write(fuse_req_t req, fuse_ino_t ino, const char *buf,
-                       size_t size, off_t off, struct fuse_file_info *fi)
+                       size_t size, off64_t off, struct fuse_file_info *fi)
 {
     struct fuse *f = req_fuse_prepare(req);
     char *path;
@@ -1808,7 +1808,7 @@ static int extend_contents(struct fuse_dh *dh, unsigned minsize)
 }
 
 static int fill_dir(void *dh_, const char *name, const struct stat *statp,
-                    off_t off)
+                    off64_t off)
 {
     struct fuse_dh *dh = (struct fuse_dh *) dh_;
     struct stat stbuf;
@@ -1856,7 +1856,7 @@ static int fill_dir(void *dh_, const char *name, const struct stat *statp,
 }
 
 static int readdir_fill(struct fuse *f, fuse_req_t req, fuse_ino_t ino,
-                        size_t size, off_t off, struct fuse_dh *dh,
+                        size_t size, off64_t off, struct fuse_dh *dh,
                         struct fuse_file_info *fi)
 {
     int err = -ENOENT;
@@ -1886,7 +1886,7 @@ static int readdir_fill(struct fuse *f, fuse_req_t req, fuse_ino_t ino,
 }
 
 static void fuse_lib_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
-                             off_t off, struct fuse_file_info *llfi)
+                             off64_t off, struct fuse_file_info *llfi)
 {
     struct fuse *f = req_fuse_prepare(req);
     struct fuse_file_info fi;

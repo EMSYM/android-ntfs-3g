@@ -6603,7 +6603,7 @@ err_exit:
 
 int ntfs_attr_data_read(ntfs_inode *ni,
 		ntfschar *stream_name, int stream_name_len,
-		char *buf, size_t size, off_t offset)
+		char *buf, size_t size, off64_t offset)
 {
 	ntfs_attr *na = NULL;
 	int res, total = 0;
@@ -6618,7 +6618,7 @@ int ntfs_attr_data_read(ntfs_inode *ni,
 			size = na->data_size - offset;
 		while (size) {
 			res = ntfs_attr_pread(na, offset, size, buf + total);
-			if ((off_t)res < (off_t)size)
+			if ((off64_t)res < (off64_t)size)
 				ntfs_log_perror("ntfs_attr_pread partial read "
 					"(%lld : %lld <> %d)",
 					(long long)offset,
@@ -6648,7 +6648,7 @@ exit:
 
 int ntfs_attr_data_write(ntfs_inode *ni,
 		ntfschar *stream_name, int stream_name_len,
-		char *buf, size_t size, off_t offset)
+		char *buf, size_t size, off64_t offset)
 {
 	ntfs_attr *na = NULL;
 	int res, total = 0;

@@ -412,7 +412,7 @@ struct fuse_lowlevel_ops {
 	 * @param off offset to read from
 	 * @param fi file information
 	 */
-	void (*read) (fuse_req_t req, fuse_ino_t ino, size_t size, off_t off,
+	void (*read) (fuse_req_t req, fuse_ino_t ino, size_t size, off64_t off,
 		      struct fuse_file_info *fi);
 
 	/**
@@ -439,7 +439,7 @@ struct fuse_lowlevel_ops {
 	 * @param fi file information
 	 */
 	void (*write) (fuse_req_t req, fuse_ino_t ino, const char *buf,
-		       size_t size, off_t off, struct fuse_file_info *fi);
+		       size_t size, off64_t off, struct fuse_file_info *fi);
 
 	/**
 	 * Flush method
@@ -561,7 +561,7 @@ struct fuse_lowlevel_ops {
 	 * @param off offset to continue reading the directory stream
 	 * @param fi file information
 	 */
-	void (*readdir) (fuse_req_t req, fuse_ino_t ino, size_t size, off_t off,
+	void (*readdir) (fuse_req_t req, fuse_ino_t ino, size_t size, off64_t off,
 			 struct fuse_file_info *fi);
 
 	/**
@@ -1020,7 +1020,7 @@ int fuse_reply_bmap(fuse_req_t req, uint64_t idx);
  */
 size_t fuse_add_direntry(fuse_req_t req, char *buf, size_t bufsize,
 			 const char *name, const struct stat *stbuf,
-			 off_t off);
+			 off64_t off);
 
 /* ----------------------------------------------------------- *
  * Utility functions					       *
