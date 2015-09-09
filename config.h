@@ -105,6 +105,9 @@
 /* Define to 1 if you have the <machine/endian.h> header file. */
 /* #undef HAVE_MACHINE_ENDIAN_H */
 
+/* Define to 1 if you have the <endian.h> header file. */
+#define HAVE_ENDIAN_H 1
+
 /* Define to 1 if mbrtowc and mbstate_t are properly declared. */
 #define HAVE_MBRTOWC 1
 
